@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fenómeno del Niño: Lengua Castellana y Educación Ambiental</title>
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* BARRA DE NAVEGACIÓN */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 65px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-logo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: lowercase;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            font-family: inherit;
+            padding: 0;
+        }
+
+        .nav-links button:hover, .nav-links button.active {
+            color: #38bdf8;
+        }
+
+        /* HEADER HERO */
+        header {
+            background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0 0 12px 0;
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            margin: 0 auto;
+            max-width: 600px;
+            opacity: 0.9;
+            font-size: 1.2rem;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* SISTEMA DE VISTAS */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            margin-top: 24px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin: 0 0 16px 0;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        ul {
+            margin: 0 0 20px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        /* IMÁGENES */
+        .content-image {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        /* TARJETAS DE ACCESO (VISTA INICIO) */
+        .intro-text {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 25px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+                gap: 10px;
+            }
+            header h1 {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav>
+        <div class="nav-logo" onclick="switchView('inicio', this)">fenómeno del niño</div>
+        <ul class="nav-links">
+            <li><button onclick="switchView('inicio', this)" class="active">Inicio</button></li>
+            <li><button onclick="switchView('lengua', this)">Lengua Castellana</button></li>
+            <li><button onclick="switchView('ambiental', this)">Educación Ambiental</button></li>
+        </ul>
+    </nav>
+
+    <!-- HEADER / INICIO -->
+    <header id="main-header">
+        <h1>El Fenómeno del Niño y el Súper Niño</h1>
+        <p id="header-subtitle">Portal educativo de investigación escolar sobre el clima y el lenguaje.</p>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL (VISTAS DINÁMICAS) -->
+    <main>
+        <!-- VISTA: INICIO -->
+        <section id="inicio" class="view-section active">
+            <p class="intro-text">Bienvenido a nuestra bitácora de investigación escolar. Selecciona una de las asignaturas a continuación para explorar los trabajos, actividades de clase y análisis desarrollados:</p>
+
+            <div class="cards-container">
+                <div class="card">
+                    <h2>Lengua Castellana</h2>
+                    <p>Investigación detallada del fenómeno, lectura de guías informativas, elaboración de hexagramas y mapas mentales.</p>
+                    <button class="btn" onclick="switchView('lengua', document.querySelector('.nav-links button:nth-child(2)'))">Ver Asignatura</button>
+                </div>
+
+                <div class="card">
+                    <h2>Educación Ambiental</h2>
+                    <p>Proyecto del profesor Héctor, entrevistas comunitarias a vecinos con más de 20 años en el barrio y juego "Detective del clima".</p>
+                    <button class="btn" onclick="switchView('ambiental', document.querySelector('.nav-links button:nth-child(3)'))">Ver Asignatura</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA: LENGUA CASTELLANA -->
+        <section id="lengua" class="view-section">
+            <h2>Lengua Castellana: Análisis y Actividades</h2>
+            
+            <p>En la clase de Lengua Castellana estuvimos investigando a fondo sobre el Fenómeno del Niño y el Súper Niño. Nos pasaron unas hojas con toda la información detallada donde se explica cuándo empezó a detectarse el fenómeno y cómo comienza a sentirse desde el Océano Pacífico, alterando la temperatura marina y provocando cambios globales en las lluvias, sequías e inundaciones.</p>
+
+            <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcRLk9ea1LMQllPE_pOkIKoqHKiBI-Sj5KewZEMZifFSfdDP-Fh1MpblvQ3KAI6lPdPfXkt9ueV1sEWbNKg" alt="Diagrama del calentamiento del Océano Pacífico durante El Niño" class="content-image">
+
+            <p>A partir de esta lectura comprensiva, realizamos diversas actividades prácticas orientadas a estructurar la información y analizar el impacto de los textos informativos.</p>
+
+            <h3>Trabajos y evidencias de la clase:</h3>
+            <ul>
+                <li><strong>Guías informativas:</strong> Análisis documental sobre el origen histórico de la detección del fenómeno desde las costas del Océano Pacífico.</li>
+                <li><strong>Hexagrama:</strong> Elaboración de un organizador gráfico en forma de hexagrama para responder de manera estructurada a las preguntas planteadas en las hojas de trabajo.</li>
+                <li><strong>Mapa mental:</strong> Creación de un mapa mental sintetizando los conceptos principales, causas, características y consecuencias del Fenómeno del Niño y el Súper Niño.</li>
+            </ul>
+        </section>
+
+        <!-- VISTA: EDUCACIÓN AMBIENTAL -->
+        <section id="ambiental" class="view-section">
+            <h2>Educación Ambiental y Gestión del Riesgo</h2>
+            
+            <p>El profesor Héctor en su clase también ha profundizado sobre el tema del fenómeno y nos dejó una actividad de una entrevista: preguntar a personas sobre si saben qué es el fenómeno del Niño y hacer 15 preguntas, entrevistando a personas que lleven más de 20 años en el barrio que nosotros estamos investigando. Además, estamos haciendo un juego que se llama "Detective del clima", donde él nos hace actividades y preguntas.</p>
+
+            <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQ36aoNFS_YuWjZF4APIyz_8lTWbDQ2USfem3stjbvQEGS3PlQkps30_ViHn4CFqpb12A4kQJUn0gzqrSc" alt="Efectos climáticos del Súper Niño" class="content-image">
+
+            <h3>Actividades clave del proyecto:</h3>
+            <ul>
+                <li><strong>Entrevista comunitaria:</strong> Encuesta de 15 preguntas aplicada a vecinos con más de 20 años en el barrio para analizar sus saberes sobre el Fenómeno del Niño.</li>
+                <li><strong>Juego "Detective del clima":</strong> Dinámica interactiva en clase con preguntas y retos dirigidos por el profesor Héctor.</li>
+                <li><strong>Análisis local:</strong> Estudio de las transformaciones ambientales del barrio a lo largo del tiempo.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Bitácora de clase • Lengua Castellana y Educación Ambiental</p>
+    </footer>
+
+    <!-- SCRIPT PARA CONTROLAR LAS VISTAS -->
+    <script>
+        function switchView(viewId, element) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.view-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Mostrar la sección seleccionada
+            document.getElementById(viewId).classList.add('active');
+
+            // Actualizar clases activas en el menú de navegación
+            const navButtons = document.querySelectorAll('.nav-links button');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            if (element && element.tagName === 'BUTTON') {
+                element.classList.add('active');
+            }
+
+            // Cambiar dinámicamente los textos del Header según la vista
+            const titleEl = document.querySelector('#main-header h1');
+            const subtitleEl = document.getElementById('header-subtitle');
+
+            if (viewId === 'inicio') {
+                titleEl.textContent = "El Fenómeno del Niño y el Súper Niño";
+                subtitleEl.textContent = "Portal educativo de investigación escolar sobre el clima y el lenguaje.";
+            } else if (viewId === 'lengua') {
+                titleEl.textContent = "Lengua Castellana";
+                subtitleEl.textContent = "Trabajos de lectura, hexagrama y mapa mental sobre el Fenómeno del Niño.";
+            } else if (viewId === 'ambiental') {
+                titleEl.textContent = "Educación Ambiental";
+                subtitleEl.textContent = "Investigación comunitaria y actividades del clima en el aula.";
+            }
+
+            // Subir la página suavemente arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
